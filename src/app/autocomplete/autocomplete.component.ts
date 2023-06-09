@@ -10,7 +10,7 @@ import { DataService } from '../data.service';
 })
 export class AutocompleteComponent implements OnInit{
   myControl = new FormControl('');
-  options: string[] = ['One', 'Two', 'Three'];
+  options: string[] | undefined;
   filteredOptions!: Observable<string[]>;
 
   constructor(private dataService: DataService) {}
@@ -29,6 +29,6 @@ export class AutocompleteComponent implements OnInit{
   private _filter(value: string) {
     const filterValue = value.toLowerCase();
 
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    return this.options ? this.options.filter(option => option.toLowerCase().includes(filterValue)) : [];
   }
 }
